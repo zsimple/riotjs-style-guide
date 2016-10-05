@@ -7,18 +7,18 @@ Opinionated *RiotJS Style Guide* for teams by [De Voorhoede](https://twitter.com
 
 ## 目的
 
-本指南提供了一种统一的方式来组织你的[RiotJS]（http://riotjs.com/）代码。它的好处：
+本指南提供了一种统一的方式来组织你的[RiotJS](http://riotjs.com/)代码。它的好处：
 
 * 开发人员/团队成员了更容易理解和寻找；
 * 更容易为IDE所理解的代码；
 * 更容易重复使用你创建的组件；
 * 更容易缓存和分发代码；
 
-本指南受[AngularJS风格指南]（https://github.com/johnpapa/angular-styleguide）John Papa 的启发。
+本指南受[AngularJS风格指南](https://github.com/johnpapa/angular-styleguide)John Papa 的启发。
 
 ## 演示
 
-我们的[RiotJS演示（https://github.com/voorhoede/riotjs-demos#riotjs-demos-）是一个伴侣本指南，说明与实际案例的指导方针。
+我们的[RiotJS演示](https://github.com/voorhoede/riotjs-demos#riotjs-demos-)是一个伴侣本指南，说明与实际案例的指导方针。
 
 ## 目录
 
@@ -45,317 +45,322 @@ Opinionated *RiotJS Style Guide* for teams by [De Voorhoede](https://twitter.com
 
 ## 基于模块的开发
 
-始终构建您的应用程序出来的小模块，做一件事，把它做好。
+始终让你的应用程序构建在小模块之上，每个模块做一件事，把它做好。
 
-模块是应用程序的小的自包含的部分。该RiotJS微架构是专门设计来帮助您创建*视图逻辑模块*，这防暴要求*标记*。
+模块是应用程序的小的自包含的部分。RiotJS 微架构是专门设计来帮助您创建 *视图逻辑模块*，Riot 称之为 *tag*。
 
-###为什么呢？
+### 为什么呢？
 
-小模块更容易学习，理解，维护，重用和调试。无论您和其他开发人员。
+小模块更容易学习，理解，维护，重用和调试。无论是您还是其他开发人员。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
-每个标签骚乱（如任何模块）必须是[首页]（https://addyosmani.com/first/）：* *聚焦（[单一职责（http://en.wikipedia.org/wiki/Single_responsibility_principle）） *独立*，*可重复使用*，*小*和*可测试*。
+每个Tag（就好像任何模块）必须遵循[FIRST](https://addyosmani.com/first/)原则：
+*Focused*（[单一职责](http://en.wikipedia.org/wiki/Single_responsibility_principle)
+*Independent*(独立)
+*Reusable*(可重复使用)
+*Small*
+*Testable*(可测试)
 
-如果你的模块不太多或变得太大，最多把它分解成更小的模块，其中每个做只是事情。
-作为一个经验法则，尽量保持每个标签文件小于100行代码。
-此外，还要确保您的标签模块中的隔离工作。例如通过加入一个独立的演示。
+如果你的模块做了很多或变得太大，把它分解成更小的模块。
+作为一个经验法则，尽量保持每个 Tag 文件小于100行代码。
+此外，还要确保您的Tag模块可以独立运作，例如通过加入一个独立的演示。
 
-** **提示：如果您使用通过一个[AMD]（https://github.com/amdjs/amdjs-api/blob/master/AMD.md）或CommonJS的模块加载，你需要[编译标签`--modular`（`-m`）标志（http://riotjs.com/guide/compiler/#amd-and-commonjs）：
-```庆典
-＃使AMD和CommonJS的
-防暴--modular
+**提示**：如果您使用通过一个[AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md)或CommonJS的模块加载，你需要[使用`--modular`(`-m`）编译标签](http://riotjs.com/guide/compiler/#amd-and-commonjs)：
+```bash
+# enable AMD and CommonJS
+riot --modular
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-##标签模块名称
+## Tag 模块名称
 
-一个标记模块是一个特定类型的模块，包含防暴标签。
+一个 Tag 模块是一个特定类型的模块，包含一个 Riot tag。
 
 每个模块的名称必须是：
 
-* ** **有意义：不overspecific，不是过于抽象。
-* ** **短：2或3个字。
-* ** ** Pronouncable：我们希望能够谈论他们。
+* **有意义**：不过于特殊，也不是过于抽象。
+* **短**：2或3个单词。
+* **能读出来**：我们希望能够谈论它们。
 
-标签模块名称也必须是：
+Tag 模块名称也必须是：
 
-* **自定义元素遵循规范的**：包括一个连字符（https://www.w3.org/TR/custom-elements/#concepts），不要使用保留名称。
-* **`应用程式`命名空间**：如果非常通用和否则为1字，以便它可以容易地在其他项目中重复使用。
+* **自定义元素遵循规范**：[包括一个连字符](https://www.w3.org/TR/custom-elements/#concepts)，不要使用保留词。
+* **`app-`命名空间**：如果非常通用那么再来一个单词，以便它可以容易地在其他项目中重复使用。
 
-###为什么呢？
+### 为什么呢？
 
-*该名称用于对模块进行通信。所以它必须是短的，有意义的和pronouncable。
-*本`tag`元件被插入到DOM。因此，他们需要坚持规范。
+* 该名称用于对模块进行通信。所以它必须是短的，有意义的和并且可读。
+* 本`tag`元件被插入到DOM。因此，他们需要坚守规范。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
 ```HTML
-<！ - 推荐 - >
-<应用头/>
-<用户列表/>
-<范围滑块/>
+<!-- 推荐 -->
+<app-header />
+<user-list />
+<range-slider />
 
-<！ - 避免 - >
-<BTN-组/> <！ - 短，但unpronouncable。使用`按钮group`代替 - >
-<UI滑块/> <！ - 所有标签都UI元素，所以是没有意义的 - >
-<滑块/> <！ - 不是自定义元素遵循规范 - >
+<!-- 避免 -->
+<btn-group /> <!-- short, but unpronouncable. use `button-group` instead -->
+<ui-slider /> <!-- all tags are ui elements, so is meaningless -->
+<slider /> <!-- not custom element spec compliant -->
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-## 1模块= 1目录
+## 1模块 = 1目录
 
-其中捆绑构建模块到一个地方的所有文件。
+把构筑一个模块所用的所有文件放到一个地方。
 
-###为什么呢？
+### 为什么呢？
 
-捆绑模块文件（防暴标签，测试，资产，文档等），使他们很容易找到，移动和重复使用。
+打包 Tag 文件（Tags，测试，静态文件，文档等）时，就很容易找到，移动和重复使用。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
-使用模块名作为目录名和文件名前缀。
+使用模块名作为目录名和文件名。
 文件扩展名取决于文件的目的。
 
 ```
-模块/
-└──我，例如/
-    ├──我-example.tag.html
-    ├──我-example.less
-    ├──...
-    └──README.md
+modules/
+└── my-example/
+    ├── my-example.tag.html
+    ├── my-example.less
+    ├── ...
+    └── README.md
 ```
 
 如果你的项目使用嵌套结构，可以嵌套在模块中的一个模块。
-例如一个通用的`无线电group`模块可以被直接放置内部“模块/”。而`搜索-filters`可仅使一个`搜索-form`内感，并且可以因此被嵌套：
+例如一个通用的`radio-group`模块可以被直接放置内部 "modules/"。而`search-filters`仅在一个`search-form`内才有意义，因此可以如下嵌套：
 
 ```
-模块/
-├──无线电组/
-| └──无线电group.tag.html
-└──搜索表单/
-    ├──搜索form.tag.html
-    ├──...
-    └──搜索过滤器/
-        └──搜索filters.tag.html
+modules/
+├── radio-group/
+|   └── radio-group.tag.html
+└── search-form/
+    ├── search-form.tag.html
+    ├── ...
+    └── search-filters/
+        └── search-filters.tag.html
+``` 
+
+[↑回到目录](#table-of-contents)
+
+
+## 使用`* .tag.html` 后缀名
+
+Riot 引入了一个名为*tags*的概念，并建议使用`* .tag`扩展。
+然而，在本质上，这些标签包含标记只是自定义元素。因此，你应该**使用`*.tag.html`扩展**。
+
+### 为什么呢？
+
+* 告诉其他开发者这不仅仅是HTML，还是 Riot Tag 元素。
+* 提高IDE支持。
+
+### 怎么做？
+
+在[浏览器模式](http://riotjs.com/guide/compiler/#in-browser-compilation)：
+```html
+<script src="path/to/modules/my-example/my-example.tag.html" type="riot/tag"></script>
 ```
 
-[↑回到目录]（＃表的，内容）
-
-
-##使用`* .tag.html`扩展
-
-防暴引入了一个名为* *标签新概念，并建议使用`* .tag`扩展。
-然而，在本质上，这些标签包含标记只是自定义元素。因此，你应该**使用`* .tag.html`扩展**。
-
-###为什么呢？
-
-*告诉开发商这不仅仅是HTML，但防暴标签元素。
-*提高IDE支持（信号如何解释）。
-
-＃＃＃ 怎么样？
-
-在[浏览器内编辑]的情况下（http://riotjs.com/guide/compiler/#in-browser-compilation）：
-```HTML
-<SCRIPT SRC =“路径/到/模块/我的，例如：/我-example.tag.html”TYPE =“防暴/标签”> </ SCRIPT>
+在[预编译模式](http://riotjs.com/guide/compiler/#pre-compilation)，设置[自定义扩展](http://riotjs.com/guide/compiler/#custom-extension)：
+```bash
+riot --ext tag.html modules/ dist/tags.js
 ```
 
-在[预编译]（http://riotjs.com/guide/compiler/#pre-compilation），设置[自定义扩展]的情况下（http://riotjs.com/guide/compiler/#custom-extension ）：
-```庆典
-防暴--ext tag.html模块/距离/ tags.js
+如果您使用的[WebPACK tag loader](https://github.com/srackham/tag-loader)，[配置 Loader](http://webpack.github.io/docs/using-loaders):
+```javascript
+{ test: /\.tag.html$/, loader: 'tag' }
 ```
 
-如果您使用的[标签WebPACK中加载程序（https://github.com/srackham/tag-loader），[配置装载机（http://webpack.github.io/docs/using-loaders。 HTML＃配置）相匹配的扩展：
-```的JavaScript
-{测试：/\.tag.html$/，装载机：'标签'}
+[↑回到目录](#table-of-contents)
+
+
+## 在 Tag 内使用`<script>`标记
+
+虽然 Riot 支持写入标签元素中的JavaScript [省略`<SCRIPT>`](http://riotjs.com/guide/#no-script-tag)
+你应该总是**使用`<script>`**包裹脚本。这是更接近Web标准，并能防止开发人员和IDE混乱。
+
+### 为什么呢？
+
+* 防止标记被解释为脚本。
+* 提高IDE支持。
+* 告诉其他开发者脚本开始和结束的地方。
+
+### 怎么做？
+
+```html
+<!-- recommended -->
+<my-example>
+	<h1>The year is { this.year }</h1>
+	
+	<script>
+		this.year = (new Date()).getUTCFullYear();
+	</script>
+</my-example>
+
+<!-- avoid -->
+<my-example>
+	<h1>The year is { this.year }</h1>
+	
+	this.year = (new Date()).getUTCFullYear();
+</my-example>
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-##使用`<script>`标记内
+## 保持 Tag 表达式简单
 
-虽然防暴支持写入标签元素中的JavaScript [未经`<SCRIPT>`]（http://riotjs.com/guide/#no-script-tag）
-你应该总是**使用`<script>`**围绕脚本。这是更接近Web标准，并防止混乱开发商和集成开发环境。
+Riot 的 行内[表达式](http://riotjs.com/guide/#expressions)是纯粹的JavaScript。这使得他们非常强大，但可能也很复杂。因此，你应该保持**表达标签简单**。
 
-###为什么呢？
+### 为什么呢？
 
-*防止标记被解释为脚本。
-*提高IDE支持（信号如何解释）。
-*告诉开发商标记的地方停和脚本开始。
+* 复杂的内联表达式难以阅读。
+* 内嵌表达式不能在其他地方服用。这可能会导致代码重复和代码腐烂。
+* 集成开发环境通常不具有表达式语法的支持，您的IDE无法自动完成验证。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
-```HTML
-<！ - 推荐 - >
-<我的，例如>
-<H1>年是{this.year} </ H1>
+将复杂的表达式表示为 tag 的法或属性。
 
-<SCRIPT>
-this.year =（新的Date（））调用getUTCFullYear（）。
-</ SCRIPT>
-</我的，例如>
+```html
+<!-- recommended -->
+<my-example>
+	{ year() + '-' + month() }
+	
+	<script>
+		const twoDigits = (num) => ('0' + num).slice(-2);
+		this.month = () => twoDigits((new Date()).getUTCMonth() +1);
+		this.year  = () => (new Date()).getUTCFullYear();
+	</script>
+</my-example>
 
-<！ - 避免 - >
-<我的，例如>
-<H1>年是{this.year} </ H1>
-
-this.year =（新的Date（））调用getUTCFullYear（）。
-</我的，例如>
+<!-- avoid -->
+<my-example>
+	{ (new Date()).getUTCFullYear() + '-' + ('0' + ((new Date()).getUTCMonth()+1)).slice(-2) }
+</my-example>
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-##保持标签的表达简单
+##保持 tag 的选项简单
 
-防暴的直列[表情]（http://riotjs.com/guide/#expressions）100％的JavaScript。这使得他们extemely强大，但可能也很复杂。因此，你应该保持**表达标签**简单。
+Riot 支持 Tag 使用的标签元素属性。标签实例中这些选项都可以通过`opts`访问。例如`<my-tag my-attr="{某个值}" />`将可以通过`opts.myAttr`访问。
 
-###为什么呢？
+虽然 Riot 通过这些属性可以支持复杂的JavaScript对象，你还是应该尽量保持**标签选项尽可能简单**。尽量只使用[JavaScript的原始数据类型](https://developer.mozilla.org/en-US/docs/Glossary/Primitive)（字符串，数字，布尔值）和函数，避免复杂的对象。
 
-*复杂的内联表达式难以阅读。
-*内嵌表达式不能elsewehere重用。这可能会导致代码重复和代码腐烂。
-*集成开发环境通常不具有表达式语法的支持，让您的IDE无法自动完成或验证。
+这一规则的例外是你的应用程序内只能使用对象（如集合或递归标签）来解决的情况下，或一些非常明显的对象（例如，在网上商店的product）。
 
-＃＃＃ 怎么样？
+### 为什么呢？
 
-将复杂的表达式标记的方法或标记属性。
+* 通过使用每个选项单独标记有助于构建一个明确和清晰的API。
+* 这样的选项值使我们的 tag API 类似于天然HTML（5）元素，这使得我们自定义元素直接且亲切。
+* 通过使用每个选项的属性，其他开发人员可以轻松地理解传递给标签实例。
+* 当传递复杂的对象使，很难看出当前正在使用哪个属性和方法。这使得重构代码困难，并可能导致代码腐烂。
 
-```HTML
-<！ - 推荐 - >
-<我的，例如>
-{年（）+' - '+月（）}
+### 怎么做？
 
-<SCRIPT>
-常量twoDigits =（NUM）=>（'0'+ NUM）.slice（-2）;
-this.month =（）=> twoDigits（（新的Date（））getUTCMonth（）+1）;
-this.year =（）=>（新的Date（））调用getUTCFullYear（）。
-</ SCRIPT>
-</我的，例如>
+使用每个选项标记属性，具有原始的值和函数：
 
-<！ - 避免 - >
-<我的，例如>
-{（新的Date（））调用getUTCFullYear（）+' - '+（'0'+（（新的Date（））getUTCMonth（）+ 1））片（-2）}
-</我的，例如>
+```html
+<!-- recommended -->
+<range-slider
+	values="[10, 20]"
+	min="0"
+	max="100"
+	step="5"
+	on-slide="{ updateInputs }"
+	on-end="{ updateResults }"
+	/>
+	
+<!-- avoid -->
+<range-slider config="{ complexConfigObject }">
+```
+```html
+<!-- exception: recursive tag, like menu item -->
+<menu-item>
+	<a href="{ opts.url }">{ opts.text }</a>
+	<ul if="{ opts.items }">
+		<li each="{ item in opts.items }">
+			<menu-item 
+				text="{ item.text }" 
+				url="{ item.url }" 
+				items="{ item.items }" />
+		</li>
+	</ul>
+</menu-item>
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-##保持标记选项原始
+## 管理好您的 tag 选项
 
-传球选择防暴支持标记使用的标签元素属性的实例。标签实例中这些选项都可以通过`opts`。例如`我-attr`对价值`<我的标签我-ATTR =“{}值”/>`将通过`opts.myAttr`可用`里面我-tag`。
+在 Riot 您的 tag 选项就是你的API。一个强大的和可预见的API，使您的代码很容易被其他开发者使用。
 
-虽然防暴支持通过这些属性通过复杂的JavaScript对象，你应该尽量保持**标签选项原始尽可能**。尽量只使用[JavaScript的原语（https://developer.mozilla.org/en-US/docs/Glossary/Primitive）（字符串，数字，布尔值）和功能。避免复杂的对象。
+tag 选项通过自定义HTML属性传递。这些属性的值可以是 Riot 表达式（`attr="{ var }"`）或普通字符串（`attr="value"`）或完全丢失。你应该充分利用**管理 tag 选项**考虑到这些不同的情况。
 
-这一规则的例外是你的应用程序内只能使用对象来解决的情况下（如集合或递归标签）或知名对象（例如，在网上商店的产品）。
+### 为什么呢？
 
-###为什么呢？
+管理好你的 tag 选项可以确保您的 tag 功能将始终可用（防御性编程）。即使当其他开发者以后使用您有没有想过的调用方式。
 
-*通过使用每个选项的属性分别标记有一个明确的和表现的API。
-*通过作为选项值我们的标签API是类似于天然HTML（5）元素的API只使用原语和功能。这使得我们自定义元素直接熟悉。
-*通过使用每个选项的属性，其他开发人员可以轻松地理解传递给标签实例。
-*当传递复杂的对象是看不出来的这实际上是正在使用的自定义标签属性和对象的方法。这使得它很难重构代码，并可能导致代码腐烂。
+### 怎么做？
 
-＃＃＃ 怎么样？
+* 使用默认设置选项值。
+* 使用类型转换投选项值与预期的类型。
+* 在使用前检查是否存在。
 
-使用每个选项标记属性，具有原始的或功能价值：
+例如[Riot 的 `<todo>`示例](http://riotjs.com/guide/#example)可以改进改进，如果没有提供`items`，使用默认的：
 
-```HTML
-<！ - 推荐 - >
-<范围滑块
-值=“[10，20]”
-分=“0”
-最大=“100”
-步=“5”
-在幻灯片=“{} updateInputs”
-上月底=“{} updateResults”
-/>
-
-<！ - 避免 - >
-<范围滑块配置=“{complexConfigObject}”>
+```javascript
+this.items = opts.items || []; // default to empty list
 ```
-```HTML
-<！ - 例外：递归标记，如菜单 - >
-<菜单项>
-<a href="{ opts.url }"> {} opts.text </A>
-<UL如果=“{opts.items}”>
-<LI每个=“{在opts.items项目}”>
-<菜单项
-文本=“{} item.text”
-URL =“{} item.url”
-项=“{} item.items”/>
-</ li>
-</ ul>
-</菜单项>
+Ensuring different use cases all work:
+```html
+<todo items="{ [{ title:'Apples' }, { title:'Oranges', done:true }] }"> <!-- uses given list -->
+<todo> <!-- uses empty list -->
 ```
 
-[↑回到目录]（＃表的，内容）
+`<range-slider>`在[使用原始的选项]（https://github.com/voorhoede/riotjs-style-guide#keep-tag-options-primitive）预计号码`min`，`max`和`step`。使用类型转换：
 
-
-##驾驭您的标记选项
-
-在防暴您的标记选项是你的API。一个强大的和可预见的API，使您的代码很容易被其他开发者使用。
-
-标签选项通过自定义HTML属性传递。这些属性的值可以是防暴表达式（`ATTR =“{VAR}”`）或普通字符串（`ATTR =“值”`）或完全丢失。你应该充分利用**的标记选项**考虑到这些不同的情况。
-
-##为什么呢？
-
-利用你的标记选项可以确保您的标记功能将始终（防御性编程）。即使当其他开发者以后使用您的代码的方式你有没有想过呢。
-
-＃＃ 怎么样？
-
-*使用默认设置选项值。
-*使用类型转换投选项值与预期的类型。
-*检查是否选择使用它之前存在。
-
-例如[暴乱的`<TODO>`示例]（http://riotjs.com/guide/#example）可以改进也工作，如果没有'items`提供，通过使用默认：
-
-```的JavaScript
-this.items = opts.items || []; //默认为空列表
+```javascript
+// if step option is valid, use as number otherwise default to one. 
+this.step = !isNaN(Number(opts.step)) ? Number(opts.step) : 1;
 ```
-确保不同的使用情况下，所有的工作：
-```HTML
-<待办事项=“{[{标题：'苹果'}，{标题：”橙子“，做到：真正}]}”> <！ - 使用定列表 - >
-<TODO> <！ - 使用空列表 - >
+确保各种情况可用
+```html
+<range-slider> <!-- uses default -->
+<range-slider step="5"> <!-- converts "5" to number 5 -->
+<range-slider step="{ x }"> <!-- tries to use `x` -->
 ```
 
-该`<范围滑块>`在[标签保持原始的选项（https://github.com/voorhoede/riotjs-style-guide#keep-tag-options-primitive）预计号码`min`，`max`和`step`。使用类型转换：
+`<range-slider>` 还接收一个*可选的* `on-slide` 和 `on-end` 回调。在使用前检查是否存在和合法：
 
-```的JavaScript
-//如果步骤的选择是有效的，用作数字，否则默认为一个。
-this.step =！isNaN（编号（opts.step））？号（opts.step）：1;
-```
-确保不同的使用情况下，所有的工作：
-```HTML
-<范围滑块> <！ - 使用默认 - >
-<范围滑块步=“5”> <！ - “5”转换为数字5 - >
-<范围滑块步=“{X}”> <！ - 尝试使用`x` - >
-```
-
-该`<范围滑盖>`还支持可选* *`上slide`和`上end`回调。检查选项存在，是预期的格式，在使用它之前：
-
-```的JavaScript
-slider.on（'滑'，（数值，手柄）=> {
-如果（typeof运算opts.onSlide ==='功能'）{
-opts.onSlide（值，手柄）;
+```javascript
+slider.on('slide', (values, handle) => {
+	if (typeof opts.onSlide === 'function') {
+		opts.onSlide(values, handle);
+	}
 }
-}
 ```
-确保不同的使用情况下，所有的工作：
-```HTML
-<范围滑块> <！ - 什么都不做 - >
-<范围滑块上滑动=“{} updateInputs”> <！ - 呼吁幻灯片updateInputs - >
-<范围滑块上滑动=“无效选项”> <！ - 什么都不做 - >
+确保各种情况下可用
+```html
+<range-slider> <!-- does nothing -->
+<range-slider on-slide="{ updateInputs }"> <!-- calls updateInputs on slide -->
+<range-slider on-slide="invalid option"> <!-- does nothing -->
 ```
 
-[↑回到目录]（＃表的，内容）
+[↑回到目录](#table-of-contents)
 
 
-##`分配到this``tag`
+## 将`this`赋值给`tag`
 
 在一个防暴标签元素的背景下，'this`绑定到[标签实例]（http://riotjs.com/api/#tag-instance）。
 因此，当你需要引用它在不同的情况下，确保`this`可作为`tag`。
