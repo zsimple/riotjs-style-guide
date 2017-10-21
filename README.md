@@ -4,6 +4,7 @@ Opinionated *RiotJS Style Guide* for teams by [De Voorhoede](https://twitter.com
 
 [![RiotJS Style Guide badge](https://cdn.rawgit.com/voorhoede/riotjs-style-guide/master/riotjs-style-guide.svg)](https://github.com/voorhoede/riotjs-style-guide)
 
+这个仓库只是一个翻译。
 
 ## 目的
 
@@ -250,7 +251,7 @@ Riot 的 行内[表达式](http://riotjs.com/guide/#expressions)是纯粹的Java
 [↑回到目录](#table-of-contents)
 
 
-##保持 tag 的选项简单
+## 保持 tag 的选项简单
 
 Riot 支持 Tag 使用的标签元素属性。标签实例中这些选项都可以通过`opts`访问。例如`<my-tag my-attr="{某个值}" />`将可以通过`opts.myAttr`访问。
 
@@ -367,9 +368,9 @@ slider.on('slide', (values, handle) => {
 
 ###为什么呢？
 
-*通过分配`this`到一个名为变量`tag`的变量告诉开发商它绑定到[标签实例]（http://riotjs.com/api/#tag-instance）无论它的使用。
+*通过分配`this`到一个名为变量`tag`的变量告诉开发商它绑定到[标签实例](http://riotjs.com/api/#tag-instance)无论它的使用。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
 ```的JavaScript
 /* 推荐的 */
@@ -399,19 +400,19 @@ VAR _this =这一点;
 [↑回到目录]（＃表的，内容）
 
 
-##将代码属性，在上面的方法
+## 将代码属性，在上面的方法
 
 骚乱标签元素在里面你通常把它标记首位，其次是它的脚本。
 特性和在脚本结合到标签（`this`）方法是在标记直接可用。你应该把在脚本的顶部按字母顺序排列的标签属性和方法。比单行标记方法不再需要在脚本后链接到不同的功能。
 
-###为什么呢？
+### 为什么呢？
 
 *放置标签的属性和方法在脚本的顶部，让你瞬间识别标签的部分可以在标记中使用。
 *按字母顺序排列的属性和方法，使他们很容易找到。
 *通过保持每一个标签的方法或属性声明一个班轮你可以一目了然地获取标签的完整概述。
 *通过移动标记方法背后的全部功能了，你最初隐藏实现细节。
 
-＃＃＃ 怎么样？
+### 怎么做？
 
 放在上面的标签属性和方法：
 
@@ -470,17 +471,17 @@ tag.on（'更新'，的onUpdate）;
 [↑回到目录]（＃表的，内容）
 
 
-##，避免假ES6语法
+## 避免假ES6语法
 
-防暴支持[速记* ES6像*方法的语法（http://riotjs.com/guide/#tag-syntax）。防暴编译语法速记`方法名（）{}``成= this.methodName功能（）{} .bind（本）`。由于这是不规范的，你应该避免**假ES6方法简写语法**。
+防暴支持[速记*类似ES6*的语法]（http://riotjs.com/guide/#tag-syntax）。防暴编译语法速记`方法名（）{}``成= this.methodName功能（）{} .bind（本）`。由于这是不规范的，你应该避免**假ES6方法简写语法**。
 
-###为什么呢？
+### 为什么呢？
 
-*假ES6简写语法是非标准的，因此可以混淆开发商。
-*标签脚本不是实际ES6类，所以集成开发环境就无法解释假ES6类方法的语法。
-*它应始终清楚哪些方法绑定到标签，从而在标记可用。速记语法掩盖写代码是透明的，容易理解的原则。
+* 假ES6简写语法是非标准的，因此可以混淆开发者。
+* 标签脚本不是实际ES6类，所以集成开发环境就无法解释假ES6类方法的语法。
+* 它应始终清楚哪些方法绑定到标签，从而在标记可用。速记语法掩盖写代码是透明的，容易理解的原则。
 
-＃＃＃ 怎么样？
+### 怎么办？
 
 使用`tag.methodName =`而不是魔法`方法名（）{}`的语法：
 
@@ -488,27 +489,27 @@ tag.on（'更新'，的onUpdate）;
 /* 推荐的 */
 var标记=这一点;
 tag.todos = [];
-tag.add =增加;
+tag.add = add;
 
-函数add（）{
-    如果（tag.text）{
-        tag.todos.push（{标题：tag.text}）;
+function add() {
+    if(tag.text) {
+        tag.todos.push({title：tag.text});
         tag.text = tag.input.value ='';
     }
 }
 
-/ * *避免/
-待办事项= [];
+/* 避免 */
+todos = [];
 
-加（）{
-    如果（this.text）{
-        this.todos.push（{标题：this.text}）;
+add() {
+    if (this.text){
+        this.todos.push({标题：this.text});
         this.text = this.input.value ='';
     }
 }
 ```
 
-预编译期间[假ES6语法禁用改造（http://riotjs.com/guide/compiler/#no-transformation）由type`设置``到none`：** **提示：
+预编译期间[假ES6语法禁用改造]（http://riotjs.com/guide/compiler/#no-transformation）由type`设置``到none`：** **提示：
 
 ```庆典
 防暴--type无
